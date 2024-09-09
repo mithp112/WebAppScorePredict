@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='Style/main.css') }}" rel="stylesheet" />
+    <title>Score Predict | Grade 11</title>
+    <script src="{{ url_for('static', filename='Action/script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+            <div class="footer">    
+                <div class="footer-text1">UIT</div>
+                <div class="footer-text2">Dự đoán kết quả thi THPT</div>
+            </div>
+        </div>
+        <div class="sub-header"></div>
+        <div class="main-content">
+            <div class="button-header">
+                <button class="btn-hoc12-1" onclick="redirectToPage1()">
+                    <div class="btn-content">
+                        <div class="btn-icon"></div>
+                        <span class="btn-text">Bạn đang học 11</span>
+                    </div>
+                </button>
+                <button class="btn-hoc11-1">
+                    <div class="btn-content">
+                        <div class="btn-icon"></div>
+                        <span class="btn-text">Bạn đang học 12</span>
+                    </div>
+                </button>
+            </div>
+            <form action="/predict2" method="POST" onsubmit="return validateCheckboxSelection()">
+                <div class="header-content">Dự đoán điểm thi THPT</div>
+                <div class="subjects">
+                    <div class="semester-labels">
+                        <span class="label-hk1-lop10">HK1 Lớp 10</span>
+                        <span class="label-hk2-lop10">HK2 Lớp 10</span>
+                        <span class="label-hk1-lop11">HK1 Lớp 11</span>
+                        <span class="label-hk2-lop11">HK2 Lớp 11</span>
+                        <span class="label-hk1-lop12">HK1 Lớp 12</span>
+                        <span class="label-hk2-lop12">HK2 Lớp 12</span>
+                    </div>
+                    <div class="content">
+                        <div class="subject-names">
+                            <span class="math-label">Điểm Toán</span>
+                            <span class="literature-label">Điểm Văn</span>
+                            <span class="physics-label">Điểm Lý</span>
+                            <span class="chemistry-label">Điểm Hóa</span>
+                            <span class="biology-label">Điểm Sinh</span>
+                            <span class="history-label">Điểm Sử</span>
+                            <span class="geography-label">Điểm Địa</span>
+                            <span class="english-label">Điểm Anh</span>
+                            <span class="civic-label">Điểm GDCD</span>
+                        </div>
+                        <div class="input">
+                            <div class="input-math">
+                                <input type="number" name="Toan_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Toan_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Toan_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Toan_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Toan_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Toan_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-literature">
+                                <input type="number" name="Van_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Van_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Van_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Van_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Van_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Van_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-physics">
+                                <input type="number" name="Ly_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Ly_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Ly_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Ly_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Ly_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Ly_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-chemistry">
+                                <input type="number" name="Hoa_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Hoa_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Hoa_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Hoa_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Hoa_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Hoa_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-biology">
+                                <input type="number" name="Sinh_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Sinh_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Sinh_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Sinh_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Sinh_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Sinh_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-history">
+                                <input type="number" name="Su_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Su_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Su_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Su_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Su_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Su_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-geography">
+                                <input type="number" name="Dia_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Dia_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Dia_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Dia_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Dia_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Dia_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-english">
+                                <input type="number" name="Anh_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Anh_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="Anh_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Anh_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="Anh_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Anh_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                            <div class="input-civic">
+                                <input type="number" name="GDCD_1_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="GDCD_2_10" min="0" max="10" step="0.1" />
+                                <input type="number" name="GDCD_1_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="GDCD_2_11" min="0" max="10" step="0.1" />
+                                <input type="number" name="GDCD_1_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="GDCD_2_12" min="0" max="10" step="0.1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="additional-info-label">
+                    Ban thi của bạn
+                </div>
+                <div class="additional-info">
+                    <div class="nature">
+                        <input type="checkbox" id="nature_checkbox" name="nature" onclick="toggleCheckbox('nature')">
+                        <label for="nature_checkbox">Tự nhiên </label>
+                    </div>
+                    <div class="social">
+                        <input type="checkbox" id="social_checkbox" name="social" onclick="toggleCheckbox('social')">
+                        <label for="social-checkbox">Xã hội</label>
+                    </div>
+                    <div  class ="errorMessage" id="errorMessage"></div>
+                </div>                  
+                <div class="additional-info-label">
+                    Các trường hợp đặt biệt
+                </div>
+                <div class="additional-info">
+                    <div class="orphan-status">
+                        <input type="checkbox" id="orphan-checkbox" name="orphan" value="1">
+                        <label for="orphan-checkbox">Mồ côi</label>
+                    </div>
+                    <div class="kios-status">
+                        <input type="checkbox" id="kios-checkbox" name="kios" value="2">
+                        <label for="kios-checkbox">Gia đình khó khăn (Hộ nghèo hoặc cận nghèo)</label>
+                    </div>
+                </div> 
+                <button type="submit" class="btn-view-results">
+                    <div class="btn-view-content"></div>
+                    <span class="btn-view-text">Xem kết quả</span>
+                </button>
+            </form>
+    </div>
+</body>
+</html>

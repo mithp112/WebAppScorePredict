@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='Style/main.css') }}" rel="stylesheet" />
+    <title>Score Predict | Grade 11</title>
+    <script src="{{ url_for('static', filename='Action/script.js') }}"></script>
+</head>
+<body>
+    <div class="container"> 
+        <div class="header">
+            <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+            <div class="footer">    
+                <div class="footer-text1">UIT</div>
+                <div class="footer-text2">Dự đoán kết quả năm tốt nghiệp THPT</div>
+            </div>
+        </div>
+        <div class="sub-header"></div>
+        <div class="main-content">
+            <div class="button-header">
+                <button class="btn-hoc12" onclick="redirectToPage1()">
+                    <div class="btn-content">
+                        <div class="btn-icon"></div>
+                        <span class="btn-text">Bạn đang học 11</span>
+                    </div>
+                </button>
+                <button class="btn-hoc11" onclick="goBack()">
+                    <div class="btn-content">
+                        <div class="btn-icon"></div>
+                        <span class="btn-text">Bạn đang học 11</span>
+                    </div>
+                </button>
+            </div>
+            <div class="header-content">Kết quả dự đoán điểm thi THPT</div>
+            <div class="subjects">
+                <div class="model1">
+                    <div class="model-infor"> Linear Regression</div>
+                    <div class="semester"> Điểm học kỳ I</div>
+                    <div class="subject-labels">
+                        <span class="math-label">Điểm Toán</span>
+                        <span class="literature-label">Điểm Văn</span>
+                        <span class="chemistry-label">{{ subjects['mon1'] }}</span>
+                        <span class="biology-label">{{ subjects['mon2'] }}</span>
+                        <span class="history-label">{{ subjects['mon3'] }}</span>
+                        <span class="physics-label">Điểm Anh</span>
+                    </div>
+                    <div class="output">
+                        <div class="output-math">{{ kq_Model1['Toán_1'][0] }}</div>
+                        <div class="output-literature">{{ kq_Model1['Văn_1'][0] }}</div>
+                        <div class="output-physics">{{ kq_Model1['Lý_1'][0] }}</div>
+                        <div class="output-chemistry">{{ kq_Model1['Hoá_1'][0] }}</div>
+                        <div class="output-biology">{{ kq_Model1['Sinh_1'][0] }}</div>
+                        <div class="output-history">{{ kq_Model1['Anh_1'][0] }}</div>
+                    </div>
+                </div>
+                <select id="imageDropdown1" onchange="showImage(1)">
+                    <option value="">-- Xem thêm --</option>
+                    <option value="{{ url_for('static', filename='images/LR_{}_accuracy.png'.format(subjects['type'])) }}">Độ chính xác của Model</option>
+                    <option value="{{ url_for('static', filename='images/LR_{}_Maths_spectrum.png'.format(subjects['type'])) }}">Phổ Điểm Toán</option>
+                    <option value="{{ url_for('static', filename='images/LR_{}_Literature_spectrum.png'.format(subjects['type'])) }}">Phổ Điểm Văn</option>
+                    <option value="{{ url_for('static', filename='images/LR_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon1_1'])) }}">Phổ {{ subjects['mon1'] }}</option>
+                    <option value="{{ url_for('static', filename='images/LR_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon2_1'])) }}">Phổ {{ subjects['mon2'] }}</option>
+                    <option value="{{ url_for('static', filename='images/LR_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon3_1'])) }}">Phổ {{ subjects['mon3'] }}</option>
+                    <option value="{{ url_for('static', filename='images/LR_{}_English_spectrumm.png'.format(subjects['type'])) }}">Phổ điểm Anh</option>
+                </select>
+                <div id="showImageDropdown1" style="margin-top: 20px;">
+                    <img class="data_analysis_img" id="displayedImage1" src="" alt="Chart" style="display: none;">
+                </div>
+                <div class="model2">
+                    <div class="model-infor">Multilayer Perceptron</div>
+                    <div class="semester"> Điểm học kỳ I</div>
+                    <div class="subject-labels">
+                        <span class="math-label">Điểm Toán</span>
+                        <span class="literature-label">Điểm Văn</span>
+                        <span class="chemistry-label">{{ subjects['mon1'] }}</span>
+                        <span class="biology-label">{{ subjects['mon2'] }}</span>
+                        <span class="history-label">{{ subjects['mon3'] }}</span>
+                        <span class="physics-label">Điểm Anh</span>
+                    </div>
+                    <div class="output">
+                        <div class="output-math">{{ kq_Model2['Toán_1'][0] }}</div>
+                        <div class="output-literature">{{ kq_Model2['Văn_1'][0] }}</div>
+                        <div class="output-physics">{{ kq_Model2['Lý_1'][0] }}</div>
+                        <div class="output-chemistry">{{ kq_Model2['Hoá_1'][0] }}</div>
+                        <div class="output-biology">{{ kq_Model2['Sinh_1'][0] }}</div>
+                        <div class="output-history">{{ kq_Model2['Anh_1'][0] }}</div>
+                    </div>
+                </div>
+                <select id="imageDropdown2" onchange="showImage(2)">
+                    <option value="">-- Xem thêm --</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_accuracy.png'.format(subjects['type'])) }}">Độ chính xác của Model</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_Maths_spectrum.png'.format(subjects['type'])) }}">Phổ Điểm Toán</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_Literature_spectrum.png'.format(subjects['type'])) }}">Phổ Điểm Văn</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon1_1'])) }}">Phổ {{ subjects['mon1'] }}</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon2_1'])) }}">Phổ {{ subjects['mon2'] }}</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon3_1'])) }}">Phổ {{ subjects['mon3'] }}</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_English_spectrumm.png'.format(subjects['type'])) }}">Phổ điểm Anh</option>
+                </select>
+                <div id="showImageDropdown2" style="margin-top: 20px;">
+                    <img class="data_analysis_img" id="displayedImage2" src="" alt="Chart" style="display: none;">
+                </div>
+                <div class="model3">
+                    <div class="model-infor">Long Short Term Memory</div>
+                    <div class="semester"> Điểm học thi tốt nghiệp</div>
+                    <div class="subject-labels">
+                        <span class="math-label">Điểm Toán</span>
+                        <span class="literature-label">Điểm Văn</span>
+                        <span class="chemistry-label">{{ subjects['mon1'] }}</span>
+                        <span class="biology-label">{{ subjects['mon2'] }}</span>
+                        <span class="history-label">{{ subjects['mon3'] }}</span>
+                        <span class="physics-label">Điểm Anh</span>
+                    </div>
+                    <div class="output">
+                        <div class="output-math">{{ kq_Model3['Toán_1'][0] }}</div>
+                        <div class="output-literature">{{ kq_Model3['Văn_1'][0] }}</div>
+                        <div class="output-physics">{{ kq_Model3['Lý_1'][0] }}</div>
+                        <div class="output-chemistry">{{ kq_Model3['Hoá_1'][0] }}</div>
+                        <div class="output-biology">{{ kq_Model3['Sinh_1'][0] }}</div>
+                        <div class="output-history">{{ kq_Model3['Anh_1'][0] }}</div>
+                    </div>
+                </div>
+                <select id="imageDropdown3" onchange="showImage(3)">
+                    <option value="">-- Xem thêm --</option>
+                    <option value="{{ url_for('static', filename='images/MLP_{}_accuracy.png'.format(subjects['type'])) }}">Độ chính xác của Model</option>
+                    <option value="{{ url_for('static', filename='images/LSTM_{}_Maths_spectrum.png'.format(subjects['type'])) }}">Phổ Điểm Toán</option>
+                    <option value="{{ url_for('static', filename='images/LSTM_{}_Literature_spectrum.png'.format(subjects['type'])) }}">Phổ Điểm Văn</option>
+                    <option value="{{ url_for('static', filename='images/LSTM_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon1_1'])) }}">Phổ {{ subjects['mon1'] }}</option>
+                    <option value="{{ url_for('static', filename='images/LSTM_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon2_1'])) }}">Phổ {{ subjects['mon2'] }}</option>
+                    <option value="{{ url_for('static', filename='images/LSTM_{}_{}_spectrum.png'.format(subjects['type'], subjects['mon3_1'])) }}">Phổ {{ subjects['mon3'] }}</option>
+                    <option value="{{ url_for('static', filename='images/LSTM_{}_English_spectrum.png'.format(subjects['type'])) }}">Phổ Điểm Anh</option>
+                </select>
+                <div id="showImageDropdown3" style="margin-top: 20px;">
+                    <img class="data_analysis_img" id="displayedImage3" src="" alt="Chart" style="display: none;">
+                </div>
+                <div class="semester">So sánh độ chính xác của 3 model</div>
+                <img class="data_analysis_img"  src="{{ url_for('static', filename='images/TN_{}_accuracy_comparison.png'.format(subjects['type'])) }}" alt="Chart">
+            </div>
+            <div class="header-content">Phân tích dữ liệu</div>
+            <div class="data_chart">
+                <div class="semester">Phân bố dữ liệu đầu vào theo xếp loại và điểm</div>
+                <img class="data_analysis_img"  src="{{ url_for('static', filename='images/TN_{}_evaluate_distribution.png'.format(subjects['type'])) }}" alt="Chart">
+                <br>
+                <img class="data_analysis_img"  src="{{ url_for('static', filename='images/TN_{}_score_distribution.png'.format(subjects['type'])) }}" alt="Chart">
+                <div class="semester">Ma trận tương quan</div>
+                <img class="data_analysis_img"  src="{{ url_for('static', filename='images/TN_{}_correlations.png'.format(subjects['type'])) }}" alt="Chart">
+                <div class="tooltip">
+                    (i)
+                    <span class="tooltiptext">-Ma trận tương quan thể hiện mức độ liên hệ giữa dữ liệu.<br>-Càng gần 1 cho thấy 2 biến đầu vào ảnh hưởng đến nhau càng nhiều.<br>-Chỉ số tương quan âm cho thấy 2 biến đầu vào không có mối liên hệ.</span>
+                </div>
+                <div class="semester">Mối quan hệ giữa dữ liệu đầu vào và đầu ra</div>
+                <select id="imageDropdown4" onchange="showImage(4)">
+                    <option value="{{ url_for('static', filename='images/TN_{}_Maths_relationship_input_output.png'.format(subjects['type'])) }}">Điểm Toán</option>
+                    <option value="{{ url_for('static', filename='images/TN_{}_Literature_relationship_input_output.png'.format(subjects['type'])) }}">Điểm Văn</option>
+                    <option value="{{ url_for('static', filename='images/TN_{}_{}_relationship_input_output.png'.format(subjects['type'], subjects['mon1_1'])) }}">{{ subjects['mon1'] }}</option>
+                    <option value="{{ url_for('static', filename='images/TN_{}_{}_relationship_input_output.png'.format(subjects['type'], subjects['mon2_1'])) }}">{{ subjects['mon2'] }}</option>
+                    <option value="{{ url_for('static', filename='images/TN_{}_{}_relationship_input_output.png'.format(subjects['type'], subjects['mon3_1'])) }}">{{ subjects['mon3'] }}</option>
+                    <option value="{{ url_for('static', filename='images/TN_{}_English_relationship_input_output.png'.format(subjects['type'])) }}">Điểm Anh</option>
+                </select>
+                <div id="showImageDropdown4" style="margin-top: 20px;">
+                    <img class="data_analysis_img" id="displayedImage4" src="{{ url_for('static', filename='images/TN_{}_Maths_relationship_input_output.png'.format(subjects['type'])) }}" alt="Chart">
+                    <div class="tooltip">
+                        (i)
+                        <span class="tooltiptext">-Mỗi điểm thể hiện cho 1 học sinh.<br>-Càng gần trục cho thấy dữ liệu đầu vào và ra càng giống nhau.<br>-Càng xa trục cho thấy dữ liệu đầu vào và ra càng khác nhau.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-view-results" onclick="goBack()">
+            <div class="btn-view-content"></div>
+            <span class="btn-view-text">Trở về</span>
+        </button>
+    </div>
+</body>
+</html>
