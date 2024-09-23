@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
     <link href="{{ url_for('static', filename='Style/main.css') }}" rel="stylesheet" />
-    <title>Score Predict | Grade 11</title>
+    <title>Score Predict | Điểm trung bình 12</title>
     <script src="{{ url_for('static', filename='Action/script.js') }}"></script>
 </head>
 <body>
@@ -12,7 +12,7 @@
             <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}">
             <div class="footer">    
                 <div class="footer-text1">UIT</div>
-                <div class="footer-text2">Dự đoán kết quả năm 12</div>
+                <div class="footer-text2">Dự đoán điểm trung bình lớp 12</div>
             </div>
         </div>
         <div class="sub-header"></div>
@@ -21,18 +21,33 @@
                 <button class="btn-hoc12" onclick="goBack()">
                     <div class="btn-content">
                         <div class="btn-icon"></div>
-                        <span class="btn-text">Bạn đang học 11</span>
+                        <span class="btn-text">Điểm trung bình 12</span>
                     </div>
                 </button>
                 <button class="btn-hoc11" onclick="redirectToPage2()">
                     <div class="btn-content">
                         <div class="btn-icon"></div>
-                        <span class="btn-text">Bạn đang học 12</span>
+                        <span class="btn-text">Điểm thi Tốt Nghiệp</span>
                     </div>
                 </button>
             </div>
-            <div class="header-content">Kết quả dự đoán điểm thi THPT</div>
+            <div class="header-content">Dự đoán điểm trung bình lớp 12</div>
             <div class="subjects">
+                {% if names %}
+                <div class="navigation">
+                    <button id="prevBtn" onclick="prevResult1()">&laquo; Previous</button>
+                    <div id="outputIndex"> 0 </div>
+                    <div class="output-name" id="outputName">{{ names[0] }}</div>
+                    <button id="nextBtn" onclick="nextResult1()">Next &raquo;</button>
+                    <form id="downloadForm" action="/download_excel1" method="post">
+                        <input type="hidden" name="names" value="{{ names }}">
+                        <input type="hidden" name="kq_Model1" value="{{ kq_Model1 }}">
+                        <input type="hidden" name="kq_Model2" value="{{ kq_Model2 }}">
+                        <input type="hidden" name="kq_Model3" value="{{ kq_Model3 }}">
+                        <button id="downloadBtn" type="submit">Download Result as Excel</button>
+                    </form>
+                </div>
+                {% endif %}
                 <div class="model1">
                     <div class="model-infor">Linear Regression</div>
                     <div class="semester"> Điểm học kỳ I</div>
@@ -48,15 +63,15 @@
                         <span class="civic-label">Điểm GDCD</span>
                     </div>
                     <div class="output">
-                        <div class="output-math">{{ kq_Model1['Toán_1'][0] }}</div>
-                        <div class="output-literature">{{ kq_Model1['Văn_1'][0] }}</div>
-                        <div class="output-physics">{{ kq_Model1['Lý_1'][0] }}</div>
-                        <div class="output-chemistry">{{ kq_Model1['Hoá_1'][0] }}</div>
-                        <div class="output-biology">{{ kq_Model1['Sinh_1'][0] }}</div>
-                        <div class="output-history">{{ kq_Model1['Sử_1'][0] }}</div>
-                        <div class="output-geography">{{ kq_Model1['Địa_1'][0] }}</div>
-                        <div class="output-english">{{ kq_Model1['Anh_1'][0] }}</div>
-                        <div class="output-civic">{{ kq_Model1['GDCD_1'][0] }}</div>
+                        <div id="model1Math1" class="output-math">{{ kq_Model1['Toán_1'][0] }}</div>
+                        <div id="model1Literature1" class="output-literature">{{ kq_Model1['Văn_1'][0] }}</div>
+                        <div id="model1Physics1" class="output-physics">{{ kq_Model1['Lý_1'][0] }}</div>
+                        <div id="model1Chemistry1" class="output-chemistry">{{ kq_Model1['Hóa_1'][0] }}</div>
+                        <div id="model1Biology1" class="output-biology">{{ kq_Model1['Sinh_1'][0] }}</div>
+                        <div id="model1History1" class="output-history">{{ kq_Model1['Sử_1'][0] }}</div>
+                        <div id="model1Geography1" class="output-geography">{{ kq_Model1['Địa_1'][0] }}</div>
+                        <div id="model1English1" class="output-english">{{ kq_Model1['Anh_1'][0] }}</div>
+                        <div id="model1Civic1" class="output-civic">{{ kq_Model1['GDCD_1'][0] }}</div>
                     </div>
                     <div class="semester"> Điểm học kỳ II</div>
                     <div class="subject-labels">
@@ -71,15 +86,15 @@
                         <span class="civic-label">Điểm GDCD</span>
                     </div>
                     <div class="output">
-                        <div class="output-math">{{ kq_Model1['Toán_2'][0] }}</div>
-                        <div class="output-literature">{{ kq_Model1['Văn_2'][0] }}</div>
-                        <div class="output-physics">{{ kq_Model1['Lý_2'][0] }}</div>
-                        <div class="output-chemistry">{{ kq_Model1['Hoá_2'][0] }}</div>
-                        <div class="output-biology">{{ kq_Model1['Sinh_2'][0] }}</div>
-                        <div class="output-history">{{ kq_Model1['Sử_2'][0] }}</div>
-                        <div class="output-geography">{{ kq_Model1['Địa_2'][0] }}</div>
-                        <div class="output-english">{{ kq_Model1['Anh_2'][0] }}</div>
-                        <div class="output-civic">{{ kq_Model1['GDCD_2'][0] }}</div>
+                        <div id="model1Math2" class="output-math">{{ kq_Model1['Toán_2'][0] }}</div>
+                        <div id="model1Literature2" class="output-literature">{{ kq_Model1['Văn_2'][0] }}</div>
+                        <div id="model1Physics2" class="output-physics">{{ kq_Model1['Lý_2'][0] }}</div>
+                        <div id="model1Chemistry2" class="output-chemistry">{{ kq_Model1['Hóa_2'][0] }}</div>
+                        <div id="model1Biology2" class="output-biology">{{ kq_Model1['Sinh_2'][0] }}</div>
+                        <div id="model1History2" class="output-history">{{ kq_Model1['Sử_2'][0] }}</div>
+                        <div id="model1Geography2" class="output-geography">{{ kq_Model1['Địa_2'][0] }}</div>
+                        <div id="model1English2" class="output-english">{{ kq_Model1['Anh_2'][0] }}</div>
+                        <div id="model1Civic2" class="output-civic">{{ kq_Model1['GDCD_2'][0] }}</div>
                     </div>
                 </div>
                 <select id="imageDropdown1" onchange="showImage(1)">
@@ -93,7 +108,7 @@
                     <option value="{{ url_for('static', filename='images/LR_History_1_12_spectrum.png') }}">Phổ điểm Sử HKI</option>
                     <option value="{{ url_for('static', filename='images/LR_Geography_1_12_spectrum.png') }}">Phổ điểm Địa HKI</option>
                     <option value="{{ url_for('static', filename='images/LR_English_1_12_spectrum.png') }}">Phổ điểm Anh HKI</option>
-                    <option value="{{ url_for('static', filename='images/LR_Civic%20Education_1_12_spectrum.png') }}">Phổ điểm GDCD HKI</option>
+                    <option value="{{ url_for('static', filename='images/LR_Civic Education_1_12_spectrum.png') }}">Phổ điểm GDCD HKI</option>
                     <option value="{{ url_for('static', filename='images/LR_Maths_2_12_spectrum.png') }}">Phổ điểm Toán HKII</option>
                     <option value="{{ url_for('static', filename='images/LR_Literature_2_12_spectrum.png') }}">Phổ điểm Văn HKII</option>
                     <option value="{{ url_for('static', filename='images/LR_Physics_2_12_spectrum.png') }}">Phổ điểm Lý HKII</option>
@@ -122,15 +137,15 @@
                         <span class="civic-label">Điểm GDCD</span>
                     </div>
                     <div class="output">
-                        <div class="output-math">{{ kq_Model2['Toán_1'][0] }}</div>
-                        <div class="output-literature">{{ kq_Model2['Văn_1'][0] }}</div>
-                        <div class="output-physics">{{ kq_Model2['Lý_1'][0] }}</div>
-                        <div class="output-chemistry">{{ kq_Model2['Hoá_1'][0] }}</div>
-                        <div class="output-biology">{{ kq_Model2['Sinh_1'][0] }}</div>
-                        <div class="output-history">{{ kq_Model2['Sử_1'][0] }}</div>
-                        <div class="output-geography">{{ kq_Model2['Địa_1'][0] }}</div>
-                        <div class="output-english">{{ kq_Model2['Anh_1'][0] }}</div>
-                        <div class="output-civic">{{ kq_Model2['GDCD_1'][0] }}</div>
+                        <div id="model2Math1" class="output-math">{{ kq_Model2['Toán_1'][0] }}</div>
+                        <div id="model2Literature1" class="output-literature">{{ kq_Model2['Văn_1'][0] }}</div>
+                        <div id="model2Physics1" class="output-physics">{{ kq_Model2['Lý_1'][0] }}</div>
+                        <div id="model2Chemistry1" class="output-chemistry">{{ kq_Model2['Hóa_1'][0] }}</div>
+                        <div id="model2Biology1" class="output-biology">{{ kq_Model2['Sinh_1'][0] }}</div>
+                        <div id="model2History1" class="output-history">{{ kq_Model2['Sử_1'][0] }}</div>
+                        <div id="model2Geography1" class="output-geography">{{ kq_Model2['Địa_1'][0] }}</div>
+                        <div id="model2English1" class="output-english">{{ kq_Model2['Anh_1'][0] }}</div>
+                        <div id="model2Civic1" class="output-civic">{{ kq_Model2['GDCD_1'][0] }}</div>
                     </div>
                     <div class="semester"> Điểm học kỳ II</div>
                     <div class="subject-labels">
@@ -145,15 +160,15 @@
                         <span class="civic-label">Điểm GDCD</span>
                     </div>
                     <div class="output">
-                        <div class="output-math">{{ kq_Model2['Toán_2'][0] }}</div>
-                        <div class="output-literature">{{ kq_Model2['Văn_2'][0] }}</div>
-                        <div class="output-physics">{{ kq_Model2['Lý_2'][0] }}</div>
-                        <div class="output-chemistry">{{ kq_Model2['Hoá_2'][0] }}</div>
-                        <div class="output-biology">{{ kq_Model2['Sinh_2'][0] }}</div>
-                        <div class="output-history">{{ kq_Model2['Sử_2'][0] }}</div>
-                        <div class="output-geography">{{ kq_Model2['Địa_2'][0] }}</div>
-                        <div class="output-english">{{ kq_Model2['Anh_2'][0] }}</div>
-                        <div class="output-civic">{{ kq_Model2['GDCD_2'][0] }}</div>
+                        <div id="model2Math2" class="output-math">{{ kq_Model2['Toán_2'][0] }}</div>
+                        <div id="model2Literature2" class="output-literature">{{ kq_Model2['Văn_2'][0] }}</div>
+                        <div id="model2Physics2" class="output-physics">{{ kq_Model2['Lý_2'][0] }}</div>
+                        <div id="model2Chemistry2" class="output-chemistry">{{ kq_Model2['Hóa_2'][0] }}</div>
+                        <div id="model2Biology2" class="output-biology">{{ kq_Model2['Sinh_2'][0] }}</div>
+                        <div id="model2History2" class="output-history">{{ kq_Model2['Sử_2'][0] }}</div>
+                        <div id="model2Geography2" class="output-geography">{{ kq_Model2['Địa_2'][0] }}</div>
+                        <div id="model2English2" class="output-english">{{ kq_Model2['Anh_2'][0] }}</div>
+                        <div id="model2Civic2" class="output-civic">{{ kq_Model2['GDCD_2'][0] }}</div>
                     </div>
                 </div>
                 <select id="imageDropdown2" onchange="showImage(2)">
@@ -167,7 +182,7 @@
                     <option value="{{ url_for('static', filename='images/MLP_History_1_12_spectrum.png') }}">Phổ điểm Sử HKI</option>
                     <option value="{{ url_for('static', filename='images/MLP_Geography_1_12_spectrum.png') }}">Phổ điểm Địa HKI</option>
                     <option value="{{ url_for('static', filename='images/MLP_English_1_12_spectrum.png') }}">Phổ điểm Anh HKI</option>
-                    <option value="{{ url_for('static', filename='images/MLP_Civic%20Education_1_12_spectrum.png') }}">Phổ điểm GDCD HKI</option>
+                    <option value="{{ url_for('static', filename='images/MLP_Civic Education_1_12_spectrum.png') }}">Phổ điểm GDCD HKI</option>
                     <option value="{{ url_for('static', filename='images/MLP_Maths_2_12_spectrum.png') }}">Phổ điểm Toán HKII</option>
                     <option value="{{ url_for('static', filename='images/MLP_Literature_2_12_spectrum.png') }}">Phổ điểm Văn HKII</option>
                     <option value="{{ url_for('static', filename='images/MLP_Physics_2_12_spectrum.png') }}">Phổ điểm Lý HKII</option>
@@ -196,16 +211,15 @@
                         <span class="civic-label">Điểm GDCD</span>
                     </div>
                     <div class="output">
-                        <div class="output-math">{{ kq_Model3['Toán_1'][0] }}</div>
-                        <div class="output-literature">{{ kq_Model3['Văn_1'][0] }}</div>
-                        <div class="output-physics">{{ kq_Model3['Lý_1'][0] }}</div>
-                        <div class="output-chemistry">{{ kq_Model3['Hoá_1'][0] }}</div>
-                        <div class="output-biology">{{ kq_Model3['Sinh_1'][0] }}</div>
-                        <div class="output-history">{{ kq_Model3['Sử_1'][0] }}</div>
-                        <div class="output-geography">{{ kq_Model3['Địa_1'][0] }}</div>
-                        <div class="output-english">{{ kq_Model3['Anh_1'][0] }}</div>
-                        <div class="output-civic">{{ kq_Model3['GDCD_1'][0] }}</div>
-
+                        <div id="model3Math1" class="output-math">{{ kq_Model3['Toán_1'][0] }}</div>
+                        <div id="model3Literature1" class="output-literature">{{ kq_Model3['Văn_1'][0] }}</div>
+                        <div id="model3Physics1" class="output-physics">{{ kq_Model3['Lý_1'][0] }}</div>
+                        <div id="model3Chemistry1" class="output-chemistry">{{ kq_Model3['Hóa_1'][0] }}</div>
+                        <div id="model3Biology1" class="output-biology">{{ kq_Model3['Sinh_1'][0] }}</div>
+                        <div id="model3History1" class="output-history">{{ kq_Model3['Sử_1'][0] }}</div>
+                        <div id="model3Geography1" class="output-geography">{{ kq_Model3['Địa_1'][0] }}</div>
+                        <div id="model3English1" class="output-english">{{ kq_Model3['Anh_1'][0] }}</div>
+                        <div id="model3Civic1" class="output-civic">{{ kq_Model3['GDCD_1'][0] }}</div>
                     </div>
                     <div class="semester"> Điểm học kỳ II</div>
                     <div class="subject-labels">
@@ -220,18 +234,19 @@
                         <span class="civic-label">Điểm GDCD</span>
                     </div>
                     <div class="output">
-                        <div class="output-math">{{ kq_Model3['Toán_2'][0] }}</div>
-                        <div class="output-literature">{{ kq_Model3['Văn_2'][0] }}</div>
-                        <div class="output-physics">{{ kq_Model3['Lý_2'][0] }}</div>
-                        <div class="output-chemistry">{{ kq_Model3['Hoá_2'][0] }}</div>
-                        <div class="output-biology">{{ kq_Model3['Sinh_2'][0] }}</div>
-                        <div class="output-history">{{ kq_Model3['Sử_2'][0] }}</div>
-                        <div class="output-geography">{{ kq_Model3['Địa_2'][0] }}</div>
-                        <div class="output-english">{{ kq_Model3['Anh_2'][0] }}</div>
-                        <div class="output-civic">{{ kq_Model3['GDCD_2'][0] }}</div>
+                        <div id="model3Math2" class="output-math">{{ kq_Model3['Toán_2'][0] }}</div>
+                        <div id="model3Literature2" class="output-literature">{{ kq_Model3['Văn_2'][0] }}</div>
+                        <div id="model3Physics2" class="output-physics">{{ kq_Model3['Lý_2'][0] }}</div>
+                        <div id="model3Chemistry2" class="output-chemistry">{{ kq_Model3['Hóa_2'][0] }}</div>
+                        <div id="model3Biology2" class="output-biology">{{ kq_Model3['Sinh_2'][0] }}</div>
+                        <div id="model3History2" class="output-history">{{ kq_Model3['Sử_2'][0] }}</div>
+                        <div id="model3Geography2" class="output-geography">{{ kq_Model3['Địa_2'][0] }}</div>
+                        <div id="model3English2" class="output-english">{{ kq_Model3['Anh_2'][0] }}</div>
+                        <div id="model3Civic2" class="output-civic">{{ kq_Model3['GDCD_2'][0] }}</div>
                     </div>
                 </div>
                 <select id="imageDropdown3" onchange="showImage(3)">
+                    <option value="">-- Xem thêm --</option>
                     <option value="{{ url_for('static', filename='images/LSTM_accuracy.png') }}">Độ chính xác của Model</option>
                     <option value="{{ url_for('static', filename='images/LSTM_Maths_1_12_spectrum.png') }}">Phổ điểm Toán HKI</option>
                     <option value="{{ url_for('static', filename='images/LSTM_Literature_1_12_spectrum.png') }}">Phổ điểm Văn HKI</option>
@@ -241,7 +256,7 @@
                     <option value="{{ url_for('static', filename='images/LSTM_History_1_12_spectrum.png') }}">Phổ điểm Sử HKI</option>
                     <option value="{{ url_for('static', filename='images/LSTM_Geography_1_12_spectrum.png') }}">Phổ điểm Địa HKI</option>
                     <option value="{{ url_for('static', filename='images/LSTM_English_1_12_spectrum.png') }}">Phổ điểm Anh HKI</option>
-                    <option value="{{ url_for('static', filename='images/LSTM_Civic%20Education_1_12_spectrum.png') }}">Phổ điểm GDCD HKI</option>
+                    <option value="{{ url_for('static', filename='images/LSTM_Civic Education_1_12_spectrum.png') }}">Phổ điểm GDCD HKI</option>
                     <option value="{{ url_for('static', filename='images/LSTM_Maths_2_12_spectrum.png') }}">Phổ điểm Toán HKII</option>
                     <option value="{{ url_for('static', filename='images/LSTM_Literature_2_12_spectrum.png') }}">Phổ điểm Văn HKII</option>
                     <option value="{{ url_for('static', filename='images/LSTM_Physics_2_12_spectrum.png') }}">Phổ điểm Lý HKII</option>
@@ -260,12 +275,10 @@
             </div>
             <div class="header-content">Phân tích dữ liệu</div>
             <div class="data_chart">
-                <div class="semester">Phân bố dữ liệu đầu vào theo xếp loại và điểm</div>
-                <div>
-                    <img class="data_analysis_img"  src="{{ url_for('static', filename='images/10_11_12_evaluate_distribution.png') }}" alt="Chart">
-                    <br>
-                    <img class="data_analysis_img"  src="{{ url_for('static', filename='images/10_11_12_score_distribution.png') }}" alt="Chart">
-                </div>
+                <div class="semester">Phân bố dữ liệu đầu vào theo xếp loại</div>
+                <img class="data_analysis_img"  src="{{ url_for('static', filename='images/10_11_12_evaluate_distribution.png') }}" alt="Chart">
+                <div class="semester">Phân bố dữ liệu đầu vào theo điểm trung bình</div>
+                <img class="data_analysis_img"  src="{{ url_for('static', filename='images/10_11_12_score_distribution.png') }}" alt="Chart">
                 <div class="semester">Ma trận tương quan</div>
                 <img class="data_analysis_img"  src="{{ url_for('static', filename='images/10_11_12_correlations.png') }}" alt="Chart">
                 <div class="tooltip">
@@ -286,10 +299,11 @@
                 </select>
                 <div id="showImageDropdown4" style="margin-top: 20px;">
                     <img class="data_analysis_img" id="displayedImage4" src="{{ url_for('static', filename='images/10_11_12_Maths_relationship_input_output.png') }}" alt="Chart">
-                    <div class="tooltip">
-                        (i)
-                        <span class="tooltiptext">-Mỗi điểm thể hiện cho 1 học sinh.<br>-Càng gần trục cho thấy dữ liệu đầu vào và ra càng giống nhau.<br>-Càng xa trục cho thấy dữ liệu đầu vào và ra càng khác nhau.</span>
-                    </div>
+                </div>
+                <div class="tooltip">
+                    (i)
+                    <span class="tooltiptext">-Mỗi điểm thể hiện cho 1 học sinh.<br>-Càng gần trục cho thấy dữ liệu đầu vào và ra càng giống nhau.<br>-Càng xa trục cho thấy dữ liệu đầu vào và ra càng khác nhau.</span>
+                </div>
             </div>
         </div>
         <button class="btn-view-results" onclick="goBack()">
@@ -299,3 +313,112 @@
     </div>
 </body>
 </html>
+
+
+{% if names %}
+<script>
+    let index = 0; // Biến lưu chỉ số hiện tại
+
+    const names = {{ names|tojson|safe }};
+    const kq_Model1 = {{ kq_Model1|tojson|safe }};
+    const kq_Model2 = {{ kq_Model2|tojson|safe }};
+    const kq_Model3 = {{ kq_Model3|tojson|safe }};
+    
+    // Hàm để cập nhật tất cả các giá trị hiển thị dựa trên currentIndex
+    function updateModelDisplay1() {
+        // Cập nhật giá trị cho tên
+        document.getElementById('outputName').textContent = names[index];
+        document.getElementById('outputIndex').textContent = index;
+
+        // Cập nhật giá trị cho Model 1
+        document.getElementById('model1Math1').textContent = kq_Model1['Toán_1'][index];
+        document.getElementById('model1Literature1').textContent = kq_Model1['Văn_1'][index];
+        document.getElementById('model1Physics1').textContent = kq_Model1['Lý_1'][index];
+        document.getElementById('model1Chemistry1').textContent = kq_Model1['Hóa_1'][index];
+        document.getElementById('model1Biology1').textContent = kq_Model1['Sinh_1'][index];
+        document.getElementById('model1History1').textContent = kq_Model1['Sử_1'][index];
+        document.getElementById('model1Geography1').textContent = kq_Model1['Địa_1'][index];
+        document.getElementById('model1English1').textContent = kq_Model1['GDCD_1'][index];
+        document.getElementById('model1Civic1').textContent = kq_Model1['Anh_1'][index];
+
+        document.getElementById('model1Math2').textContent = kq_Model1['Toán_2'][index];
+        document.getElementById('model1Literature2').textContent = kq_Model1['Văn_2'][index];
+        document.getElementById('model1Physics2').textContent = kq_Model1['Lý_2'][index];
+        document.getElementById('model1Chemistry2').textContent = kq_Model1['Hóa_2'][index];
+        document.getElementById('model1Biology2').textContent = kq_Model1['Sinh_2'][index];
+        document.getElementById('model1History2').textContent = kq_Model1['Sử_2'][index];
+        document.getElementById('model1Geography2').textContent = kq_Model1['Địa_2'][index];
+        document.getElementById('model1English2').textContent = kq_Model1['GDCD_2'][index];
+        document.getElementById('model1Civic2').textContent = kq_Model1['Anh_2'][index];
+
+        // Cập nhật giá trị cho Model 2
+        document.getElementById('model2Math1').textContent = kq_Model2['Toán_1'][index];
+        document.getElementById('model2Literature1').textContent = kq_Model2['Văn_1'][index];
+        document.getElementById('model2Physics1').textContent = kq_Model2['Lý_1'][index];
+        document.getElementById('model2Chemistry1').textContent = kq_Model2['Hóa_1'][index];
+        document.getElementById('model2Biology1').textContent = kq_Model2['Sinh_1'][index];
+        document.getElementById('model2History1').textContent = kq_Model2['Sử_1'][index];
+        document.getElementById('model2Geography1').textContent = kq_Model2['Địa_1'][index];
+        document.getElementById('model2English1').textContent = kq_Model2['GDCD_1'][index];
+        document.getElementById('model2Civic1').textContent = kq_Model2['Anh_1'][index];
+
+        document.getElementById('model2Math2').textContent = kq_Model2['Toán_2'][index];
+        document.getElementById('model2Literature2').textContent = kq_Model2['Văn_2'][index];
+        document.getElementById('model2Physics2').textContent = kq_Model2['Lý_2'][index];
+        document.getElementById('model2Chemistry2').textContent = kq_Model2['Hóa_2'][index];
+        document.getElementById('model2Biology2').textContent = kq_Model2['Sinh_2'][index];
+        document.getElementById('model2History2').textContent = kq_Model2['Sử_2'][index];
+        document.getElementById('model2Geography2').textContent = kq_Model2['Địa_2'][index];
+        document.getElementById('model2English2').textContent = kq_Model2['GDCD_2'][index];
+        document.getElementById('model2Civic2').textContent = kq_Model2['Anh_2'][index];
+
+        // Cập nhật giá trị cho Model 3
+        document.getElementById('model3Math1').textContent = kq_Model3['Toán_1'][index];
+        document.getElementById('model3Literature1').textContent = kq_Model3['Văn_1'][index];
+        document.getElementById('model3Physics1').textContent = kq_Model3['Lý_1'][index];
+        document.getElementById('model3Chemistry1').textContent = kq_Model3['Hóa_1'][index];
+        document.getElementById('model3Biology1').textContent = kq_Model3['Sinh_1'][index];
+        document.getElementById('model3History1').textContent = kq_Model3['Sử_1'][index];
+        document.getElementById('model3Geography1').textContent = kq_Model3['Địa_1'][index];
+        document.getElementById('model3English1').textContent = kq_Model3['GDCD_1'][index];
+        document.getElementById('model3Civic1').textContent = kq_Model3['Anh_1'][index];
+
+        document.getElementById('model3Math2').textContent = kq_Model3['Toán_2'][index];
+        document.getElementById('model3Literature2').textContent = kq_Model3['Văn_2'][index];
+        document.getElementById('model3Physics2').textContent = kq_Model3['Lý_2'][index];
+        document.getElementById('model3Chemistry2').textContent = kq_Model3['Hóa_2'][index];
+        document.getElementById('model3Biology2').textContent = kq_Model3['Sinh_2'][index];
+        document.getElementById('model3History2').textContent = kq_Model3['Sử_2'][index];
+        document.getElementById('model3Geography2').textContent = kq_Model3['Địa_2'][index];
+        document.getElementById('model3English2').textContent = kq_Model3['GDCD_2'][index];
+        document.getElementById('model3Civic2').textContent = kq_Model3['Anh_2'][index];
+    }
+
+    // Hàm để chuyển sang dữ liệu trước đó
+    function prevResult1() {
+        console.log(index);
+        if (index > 0) {
+            index--;
+        }
+        else{
+            index = names.length -1;
+        }
+        updateModelDisplay1();
+    }
+
+    // Hàm để chuyển sang dữ liệu tiếp theo
+    function nextResult1() {
+        console.log(index);
+        if (index < names.length - 1) {
+            index++;
+        }
+        else{
+            index = 0
+        }
+        updateModelDisplay1();
+    }
+
+    // Cập nhật khi trang load lần đầu
+    document.addEventListener('DOMContentLoaded', updateModelDisplay1);
+</script>
+{% endif %}

@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
     <link href="{{ url_for('static', filename='Style/main.css') }}" rel="stylesheet" />
-    <title>Score Predict | Grade 11</title>
+    <title>Score Predict | Điểm thi tốt nghiệp</title>
     <script src="{{ url_for('static', filename='Action/script.js') }}"></script>
 </head>
 <body>
@@ -21,17 +21,17 @@
                 <button class="btn-hoc12-1" onclick="redirectToPage1()">
                     <div class="btn-content">
                         <div class="btn-icon"></div>
-                        <span class="btn-text">Bạn đang học 11</span>
+                        <span class="btn-text">Điểm trung bình 12</span>
                     </div>
                 </button>
                 <button class="btn-hoc11-1">
                     <div class="btn-content">
                         <div class="btn-icon"></div>
-                        <span class="btn-text">Bạn đang học 12</span>
+                        <span class="btn-text">Điểm thi Tốt Nghiệp</span>
                     </div>
                 </button>
             </div>
-            <form action="/predict2" method="POST" onsubmit="return validateCheckboxSelection()">
+            <form action="/predict2" method="POST">
                 <div class="header-content">Dự đoán điểm thi THPT</div>
                 <div class="subjects">
                     <div class="semester-labels">
@@ -56,76 +56,76 @@
                         </div>
                         <div class="input">
                             <div class="input-math">
-                                <input type="number" name="Toan_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Toan_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Toan_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Toan_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Toan_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Toan_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Toan_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Toan_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Toan_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Toan_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Toan_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Toan_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-literature">
-                                <input type="number" name="Van_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Van_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Van_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Van_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Van_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Van_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Van_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Van_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Van_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Van_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Van_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Van_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-physics">
-                                <input type="number" name="Ly_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Ly_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Ly_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Ly_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Ly_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Ly_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Ly_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Ly_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Ly_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Ly_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Ly_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Ly_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-chemistry">
-                                <input type="number" name="Hoa_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Hoa_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Hoa_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Hoa_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Hoa_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Hoa_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Hoa_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Hoa_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Hoa_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Hoa_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Hoa_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Hoa_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-biology">
-                                <input type="number" name="Sinh_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Sinh_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Sinh_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Sinh_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Sinh_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Sinh_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Sinh_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Sinh_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Sinh_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Sinh_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Sinh_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Sinh_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-history">
-                                <input type="number" name="Su_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Su_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Su_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Su_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Su_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Su_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Su_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Su_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Su_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Su_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Su_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Su_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-geography">
-                                <input type="number" name="Dia_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Dia_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Dia_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Dia_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Dia_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Dia_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Dia_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Dia_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Dia_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Dia_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Dia_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Dia_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-english">
-                                <input type="number" name="Anh_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Anh_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="Anh_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Anh_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="Anh_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="Anh_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="Anh_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Anh_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Anh_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Anh_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Anh_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="Anh_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                             <div class="input-civic">
-                                <input type="number" name="GDCD_1_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="GDCD_2_10" min="0" max="10" step="0.1" />
-                                <input type="number" name="GDCD_1_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="GDCD_2_11" min="0" max="10" step="0.1" />
-                                <input type="number" name="GDCD_1_12" min="0" max="10" step="0.1" />
-                                <input type="number" name="GDCD_2_12" min="0" max="10" step="0.1" />
+                                <input type="number" name="GDCD_1_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="GDCD_2_10" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="GDCD_1_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="GDCD_2_11" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="GDCD_1_12" min="0" max="10" step="0.1" required/>
+                                <input type="number" name="GDCD_2_12" min="0" max="10" step="0.1" required/>
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,6 @@
                         <input type="checkbox" id="social_checkbox" name="social" onclick="toggleCheckbox('social')">
                         <label for="social-checkbox">Xã hội</label>
                     </div>
-                    <div  class ="errorMessage" id="errorMessage"></div>
                 </div>                  
                 <div class="additional-info-label">
                     Các trường hợp đặt biệt
@@ -157,11 +156,22 @@
                         <label for="kios-checkbox">Gia đình khó khăn (Hộ nghèo hoặc cận nghèo)</label>
                     </div>
                 </div> 
+                <div>
+                    <button type="submit" class="btn-view-results">
+                        <div class="btn-view-content"></div>
+                        <span class="btn-view-text">Xem kết quả</span>
+                    </button>
+                </div>
+            </form>
+            <form action="/predict_excel2" method="POST" enctype="multipart/form-data">
+                <label for="excelFile">Chọn file Excel:</label>
+                <input type="file" id="excelFile" name="excel_file" accept=".xlsx,.xls">
                 <button type="submit" class="btn-view-results">
                     <div class="btn-view-content"></div>
-                    <span class="btn-view-text">Xem kết quả</span>
+                    <span class="btn-view-text">Xem kết quả từ excel</span>
                 </button>
             </form>
+        </div>
     </div>
 </body>
 </html>

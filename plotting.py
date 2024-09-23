@@ -7,6 +7,7 @@ import matplotlib.gridspec as gridspec
 
 
 
+
 subjects_10_11_12 = [
     "Maths_1_12", "Literature_1_12", "Physics_1_12", "Chemistry_1_12", "Biology_1_12",
     "History_1_12", "Geography_1_12", "English_1_12", "Civic Education_1_12",
@@ -387,7 +388,8 @@ def calculate_averages(type, excel_file):
             'Civic Education': [9, 18, 27, 36, 45, 54],
             'Math_TN': [55], 'Literature_TN': [56],
             'Physics_TN': [57], 'Chemistry_TN': [58], 'Biology': [59],
-            'English_TN': [60],}
+            'English_TN': [60],
+            'ophan&kios': [61]}
     elif type == 'TN_XH':
         subject_indices = {
             'Maths': [1, 10, 19, 28, 37, 46],
@@ -401,7 +403,8 @@ def calculate_averages(type, excel_file):
             'Civic Education': [9, 18, 27, 36, 45, 54],
             'Math_TN': [55], 'Literature_TN': [56],
             'History_TN': [57], 'Geography_TN': [58], 'Civic Education': [59],
-            'English_TN': [60],}
+            'English_TN': [60],
+            'ophan&kios': [61]}
     else:
         subject_indices = {
             'Maths': [1, 10, 19, 28, 37, 46],
@@ -412,7 +415,8 @@ def calculate_averages(type, excel_file):
             'History': [6, 15, 24, 33, 42, 51],
             'Geography': [7, 16, 25, 34, 43, 52],
             'English': [8, 17, 26, 35, 44, 53],
-            'Civic Education': [9, 18, 27, 36, 45, 54],}
+            'Civic Education': [9, 18, 27, 36, 45, 54],
+            'ophan&kios': [55]}
     
     print(f"Các chỉ số của môn học: {subject_indices}")
 
@@ -433,8 +437,8 @@ def plot_calculate_correlations(type, excel_file):
     plt.figure(figsize=(10, 8))
     sns.heatmap(correlation_matrix, annot=True, cmap='Blues', fmt=".2f")
     plt.title('Correlation Matrix')
-    plt.savefig(f'static/Images/{type}_correlations.png')
-    plt.close()
+    #plt.savefig(f'static/Images/{type}_correlations.png')
+    plt.show()
 
 
 
@@ -507,7 +511,7 @@ def plot_relationship_input_output(type, file_path):
 
 
 
-# -----* Gọi lại các lệnh bên dưới để vẽ lại biểu đồ trong trường hợp cập nhập thêm dữ liệu *-----
+# -----* Gọi lại các lệnh bên dưới để vẽ lại biểu đồ trong trường hợp cập nhập thêm dữ liệu *----- #
 # Vẽ biểu đồ phổ điểm
 # plot_subjects_point_spectrum('LR','E:/Download/ScorePredict/data/LR_Actual_Pred_10_11_12.xlsx', subjects_10_11_12)
 # plot_subjects_point_spectrum('MLP','E:/Download/ScorePredict/data/MLP_Actual_Pred_10_11_12.xlsx', subjects_10_11_12)
@@ -533,7 +537,7 @@ def plot_relationship_input_output(type, file_path):
 
 
 
-
+# Vẽ biểu đồ so sánh độ chính xác
 # plot_individual_model_accuracy_comparison('10_11_12', 'E:/Download/ScorePredict/data/LR_Actual_Pred_10_11_12.xlsx', 'E:/Download/ScorePredict/data/MLP_Actual_Pred_10_11_12.xlsx', 'E:/Download/ScorePredict/data/LSTM_Actual_Pred_10_11_12.xlsx', subjects_10_11_12)
 # plot_individual_model_accuracy_comparison('TN_TN', 'E:/Download/ScorePredict/data/LR_Actual_Pred_TN.xlsx', 'E:/Download/ScorePredict/data/MLP_Actual_Pred_TN.xlsx', 'E:/Download/ScorePredict/data/LSTM_Actual_Pred_TN.xlsx', subjects_TN)
 # plot_individual_model_accuracy_comparison('TN_XH', 'E:/Download/ScorePredict/data/LR_Actual_Pred_XH.xlsx', 'E:/Download/ScorePredict/data/MLP_Actual_Pred_XH.xlsx', 'E:/Download/ScorePredict/data/LSTM_Actual_Pred_XH.xlsx', subjects_XH)
@@ -541,18 +545,18 @@ def plot_relationship_input_output(type, file_path):
 
 
 # Vẽ biểu đồ tròn phân bố học lực
-plot_grade_distribution_pie('10_11_12', 'E:/Download/ScorePredict/data/10_11_12.xlsx')
-plot_grade_distribution_pie('TN_TN', 'E:/Download/ScorePredict/data/TN_TN.xlsx')
-plot_grade_distribution_pie('TN_XH', 'E:/Download/ScorePredict/data/TN_XH.xlsx')
+# plot_grade_distribution_pie('10_11_12', 'E:/Download/ScorePredict/data/10_11_12.xlsx')
+# plot_grade_distribution_pie('TN_TN', 'E:/Download/ScorePredict/data/TN_TN.xlsx')
+# plot_grade_distribution_pie('TN_XH', 'E:/Download/ScorePredict/data/TN_XH.xlsx')
 
 
 # Vẽ biểu đồ tròn phân bố điểm trung bình
-plot_score_distribution_pie('10_11_12', 'E:/Download/ScorePredict/data/10_11_12.xlsx')
-plot_score_distribution_pie('TN_TN', 'E:/Download/ScorePredict/data/TN_TN.xlsx')
-plot_score_distribution_pie('TN_XH', 'E:/Download/ScorePredict/data/TN_XH.xlsx')
+# plot_score_distribution_pie('10_11_12', 'E:/Download/ScorePredict/data/10_11_12.xlsx')
+# plot_score_distribution_pie('TN_TN', 'E:/Download/ScorePredict/data/TN_TN.xlsx')
+# plot_score_distribution_pie('TN_XH', 'E:/Download/ScorePredict/data/TN_XH.xlsx')
 
 # Vẽ ma trận tương quan
-# plot_calculate_correlations('10_11_12', 'E:/Download/ScorePredict/data/10_11_12.xlsx')
+plot_calculate_correlations('10_11_12', 'E:/Download/ScorePredict/data/10_11_12.xlsx')
 # plot_calculate_correlations('TN_TN', 'E:/Download/ScorePredict/data/TN_TN.xlsx')
 # plot_calculate_correlations('TN_XH', 'E:/Download/ScorePredict/data/TN_XH.xlsx')
 

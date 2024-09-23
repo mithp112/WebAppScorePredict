@@ -449,3 +449,63 @@ button {
   border-radius: 4px; /* Bo góc nhẹ cho khung thông báo */
   display: none; /* Ẩn thông báo lỗi ban đầu */
 }
+
+
+
+/* Đặt tất cả phần tử trong phần điều hướng trên cùng một hàng */
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px; /* Khoảng cách giữa các phần tử */
+}
+
+/* Styling cho các nút */
+.navigation button {
+  padding: 10px 20px;
+  border: 2px solid #4CAF50; /* Khung của nút */
+  background-color: white; /* Màu nền trắng */
+  color: #4CAF50;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  white-space: nowrap; /* Đảm bảo chữ không bị xuống hàng */
+}
+
+/* Đảm bảo chữ trong nút tải xuống không bị chia hàng */
+#downloadForm button {
+  padding: 10px 20px;
+  border: 2px solid #4CAF50;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  white-space: nowrap; /* Giữ chữ trên 1 dòng */
+}
+
+/* Thay đổi màu khi hover vào nút */
+.navigation button:hover,
+#downloadForm button:hover {
+  background-color: #45a049;
+  color: white;
+}
+
+/* Phần hiển thị tên (output-name) */
+.output-name {
+  padding: 10px 20px;
+  border: 2px solid #ccc; /* Khung của ô hiển thị tên */
+  background-color: #f9f9f9;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+  border-radius: 5px;
+  min-width: 200px; /* Đặt chiều rộng tối thiểu */
+}
+
+/* Đảm bảo form nút Download cũng căn chỉnh */
+#downloadForm {
+  display: inline-block;
+}

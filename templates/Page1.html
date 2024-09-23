@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
     <link href="{{ url_for('static', filename='Style/main.css') }}" rel="stylesheet" />
-    <title>Score Predict | Grade 11</title>
+    <title>Score Predict | Điểm trung bình 12</title>
     <script src="{{ url_for('static', filename='Action/script.js') }}"></script>
 </head>
 <body>
@@ -12,7 +12,7 @@
             <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}">
             <div class="footer">    
                 <div class="footer-text1">UIT</div>
-                <div class="footer-text2">Dự đoán kết quả năm 12</div>
+                <div class="footer-text2">Dự đoán điểm trung bình lớp 12</div>
             </div>
         </div>
         <div class="sub-header"></div>
@@ -21,24 +21,30 @@
                 <button class="btn-hoc12">
                     <div class="btn-content">
                         <div class="btn-icon"></div>
-                        <span class="btn-text">Bạn đang học 11</span>
+                        <span class="btn-text">Điểm trung bình 12</span>
                     </div>
                 </button>
                 <button class="btn-hoc11" onclick="redirectToPage2()">
                     <div class="btn-content">
                         <div class="btn-icon"></div>
-                        <span class="btn-text">Bạn đang học 12</span>
+                        <span class="btn-text">Điểm thi Tốt Nghiệp</span>
                     </div>
                 </button>
             </div>
+            <form action="/predict_excel1" method="POST" enctype="multipart/form-data">
+                <label for="excelFile">Chọn file Excel:</label>
+                <input type="file" id="excelFile" name="excel_file" accept=".xlsx,.xls">
+                <button type="submit" class="btn-view-results">Dự đoán từ Excel</button>
+            </form>
             <form action="/predict1" method="POST">
-                <div class="header-content">Dự đoán điểm thi THPT</div>
+                <div class="header-content">Dự đoán điểm trung bình lớp 12</div>
                 <div class="subjects">
                     <div class="semester-labels">
                         <span class="label-hk1-lop10">HK1 Lớp 10</span>
                         <span class="label-hk2-lop10">HK2 Lớp 10</span>
                         <span class="label-hk1-lop11">HK1 Lớp 11</span>
                         <span class="label-hk2-lop11">HK2 Lớp 11</span>
+
                     </div>
                     <div class="content">
                         <div class="subject-names">
@@ -110,24 +116,26 @@
                             
                         </div>                       
                     </div> 
-                    <div class="additional-info-label">
-                        Các trường hợp đặt biệt
-                    </div>
-                    <div class="additional-info">
-                        <div class="orphan-status">
-                            <input type="checkbox" id="orphan-checkbox" name="orphan" value="1">
-                            <label for="orphan-checkbox">Mồ côi</label>
-                        </div>
-                        <div class="kios-status">
-                            <input type="checkbox" id="kios-checkbox" name="kios" value="2">
-                            <label for="kios-checkbox">Gia đình khó khăn (Hộ nghèo hoặc cận nghèo)</label>
-                        </div>
-                    </div> 
                 </div>
-                <button type="submit" class="btn-view-results">
-                    <div class="btn-view-content"></div>
-                    <span class="btn-view-text">Xem kết quả</span>
-                </button>
+                <div class="additional-info-label">
+                    Các trường hợp đặt biệt
+                </div>
+                <div class="additional-info">
+                    <div class="orphan-status">
+                        <input type="checkbox" id="orphan-checkbox" name="orphan" value="1">
+                        <label for="orphan-checkbox">Mồ côi</label>
+                    </div>
+                    <div class="kios-status">
+                        <input type="checkbox" id="kios-checkbox" name="kios" value="2">
+                        <label for="kios-checkbox">Gia đình khó khăn (Hộ nghèo hoặc cận nghèo)</label>
+                    </div>
+                </div> 
+                <div>
+                    <button type="submit" class="btn-view-results">
+                        <div class="btn-view-content"></div>
+                        <span class="btn-view-text">Xem kết quả</span>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
